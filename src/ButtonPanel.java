@@ -10,6 +10,7 @@ import javax.swing.JButton;
 public class ButtonPanel extends JPanel
 {  
   private String[] shapeNames; // array of shapes that can be drawn
+  private String[] colors;
   private JButton clearButton;  // clear button
   private ShapeIComponent shapeComponent;
   
@@ -19,8 +20,8 @@ public class ButtonPanel extends JPanel
   public ButtonPanel (ShapeIComponent shapeComponent)
   {
     this.shapeComponent = shapeComponent;
-    shapeNames = new String[]{Shape.RECTANGLE, Shape.OVAL, Shape.ARC}; // modify this if you add more shapes
-    
+    shapeNames = new String[]{Shape.RECTANGLE, Shape.OVAL, Shape.ARC, Shape.LINE}; // modify this if you add more shapes
+    colors = new String[]{ShapeIComponent.RED, ShapeIComponent.BLUE, ShapeIComponent.YELLOW, shapeComponent.GREEN};
     // initialize the panel using the init() private helper method
     init();
   }
@@ -41,6 +42,22 @@ public class ButtonPanel extends JPanel
           if (shapeComponent != null)
           {
             shapeComponent.setShape(e.getActionCommand());
+          }
+        }
+      });
+    }
+
+    for (String name: colors)
+    {
+      currButton = new JButton(name);
+      add(currButton); // add is an INHERITED METHOD from a class in JPanel's inheritance hierarchy!
+      currButton.addActionListener(new ActionListener()
+      {
+        public void actionPerformed (ActionEvent e)
+        {
+          if (shapeComponent != null)
+          {
+            shapeComponent.setColor(e.getActionCommand());
           }
         }
       });

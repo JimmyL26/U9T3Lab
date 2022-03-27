@@ -14,9 +14,15 @@ import javax.swing.JComponent;
  */
 public class ShapeIComponent extends JComponent
 {
+  public static final String YELLOW = "Yellow";
+  public static final String GREEN = "Green";
+  public static final String RED = "Red";
+  public static final String BLUE = "Blue";
+
   private ArrayList<Shape> shapes; // list of shapes
   private Shape currentShape; // current shape being dragged
   private String currShapeType; // default shape type
+  private String currentColor;
   private int width;
   private int height;
   private Color backgroundColor;
@@ -125,7 +131,12 @@ public class ShapeIComponent extends JComponent
   {
     currShapeType = shapeType;
   }
-  
+
+  public void setColor(String colorType)
+  {
+    currentColor = colorType;
+  }
+
   /** method to move all shapes from the list of shapes
     */
   public void clearShapes()
@@ -162,6 +173,10 @@ public class ShapeIComponent extends JComponent
       {
         currentShape = new Arc();
       }
+      else if (currShapeType.equals(Shape.LINE))
+      {
+        currentShape = new Line();
+      }
       
       // fill in point1 and point2 in the new shape
       currentShape.setPoint1Values(currX,currY);
@@ -172,6 +187,23 @@ public class ShapeIComponent extends JComponent
       
       // repaint all
       repaint();
+
+      if (currentColor.equals(RED))
+      {
+        backgroundColor = Color.red;
+      }
+      else if (currentColor.equals(YELLOW))
+      {
+        backgroundColor = Color.yellow;
+      }
+      else if (currentColor.equals(BLUE))
+      {
+        backgroundColor = Color.blue;
+      }
+      else if (currentColor.equals(GREEN))
+      {
+        backgroundColor = Color.green;
+      }
     }
     
     // Method to handle when the user releases the mouse
